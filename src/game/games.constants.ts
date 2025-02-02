@@ -7,8 +7,8 @@ export interface IGame {
     genre: string
     publisher: string
     developer: string
-    release_date: string
-    short_description: string
+    releaseDate: string
+    shortDescription: string
 }
 
 export type GamesFilter = {
@@ -16,6 +16,25 @@ export type GamesFilter = {
     category: string
     sortBy: SORT
 }
+
+export interface IScreenshot {
+    id: number
+    image: string
+}
+interface MinimumSystemRequirements {
+    os: string
+    processor: string
+    memory: string
+    graphics: string
+    storage: string
+}
+export interface IGameDetails extends IGame {
+    screenshots: IScreenshot[]
+    description: string
+    minimumSystemRequirements: MinimumSystemRequirements
+    status: string
+}
+
 
 export const SORT_FILTER = ['release-date', 'alphabetical', 'relevance']
 export type SORT = (typeof SORT_FILTER)[number]

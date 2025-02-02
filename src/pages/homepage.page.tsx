@@ -2,38 +2,43 @@ import { useEffect, useState } from 'react'
 import { Page } from '../common/components'
 import { GameCard } from '../game/components/game-card.component'
 import { useGames } from '../game/games.hooks'
-import { BASE_FILTER, GamesFilter, GameFilterComponent, IGame } from '../game'
+import { GameFilterComponent, GameSearch, IGame } from '../game'
 
 export const HomePage = () => {
-  const { games, fetchGames, isLoading } = useGames()
-  const [ filter, setFilter ] = useState<GamesFilter>(BASE_FILTER)
+  const { games, isLoading } = useGames()
+  const [ filteredGames, setFilteredGames ] = useState<IGame[]>(games)
 
-  useEffect(() => {;(async () => {
-    await fetchGames(filter)
-  })}), [filter]
-
-  const renderGames = (games: IGame[]) => {
+  const renderGames = (filteredGames: IGame[]) => {
     if (isLoading === true) {
       return <div>Loading...</div>
     }
 
-    if (games.length === 0) {
+    if (filteredGames.length === 0) {
       return <div>No games found</div>
     }
+
     return (
       <div className='game-gallery-container'>
-        {games.map((game) => {
+        {filteredGames.map((game) => {
           return <GameCard key={game.id} game={game} />
         })}
       </div>
     )
   }
 
+  useEffect(() => {
+    setFilteredGames(games)
+  }, [games])
+
   return (
     <Page>
       <h1>Find & track the best free-to-play games!</h1>
-      <GameFilterComponent gameFilter={filter} setFilter={setFilter} />
-      {renderGames(games)}
+      <p>Search for what to play next!</p>
+      <div className="row">
+        <GameSearch games={games} setGames={setFilteredGames} />
+      </div>
+      <GameFilterComponent />
+      {renderGames(filteredGames)}
     </Page>
   )
 }

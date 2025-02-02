@@ -1,1 +1,5 @@
 export * from './game-filters.component'
+export * from './game-card.component'
+export * from './game-details-card.component'
+export * from './game-screenshots.component'
+export * from './game-search.component'
