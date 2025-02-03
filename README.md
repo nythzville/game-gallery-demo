@@ -6,7 +6,7 @@ A simple react and typesccript application that allow user to search and see gam
 _**Note:** This a demo application for BarBooks coding assessment._
 
 ### Libraries:
-1. Redux Toolkit - For maging filter state
+1. Redux Toolkit - For managing centralized filter state
 2. React Select - For filter  select inputs
 2. Font Awesome - For icons
 
@@ -21,3 +21,6 @@ API repository here: [game-gallery-api](https://github.com/nythzville/game-galle
 npm install
 npm start
 ```
+
+## Comment
+Time is so limited, I can polish the design and functionalities if I have a changes.
