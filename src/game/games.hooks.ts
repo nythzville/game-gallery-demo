@@ -44,6 +44,18 @@ export const useGames = () => {
     }
   }
 
+  const mockImplementation = (games?: IGame[], game?: IGameDetails) => {
+    if (games) {
+      setGames(games)
+      setIsLoading(false)
+    }
+    if (game) {
+      setGame(game)
+      setIsLoading(false)
+    }
+    return { games, game, isLoading: isLoading }
+  }
+
   useEffect(() => {
     fetchGames(gameFilter)
   }, [gameFilter])
@@ -54,5 +66,5 @@ export const useGames = () => {
     }
   }, [gameId])
 
-  return { games, game, fetchGames, getGameByGameId, isLoading, error }
+  return { games, game, fetchGames, getGameByGameId, mockImplementation, isLoading, error }
 }

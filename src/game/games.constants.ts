@@ -1,6 +1,6 @@
 
 export interface IGame {
-    id: string
+    id: number
     title: string
     platform: string
     thumbnail: string

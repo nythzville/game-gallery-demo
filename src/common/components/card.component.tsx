@@ -1,12 +1,13 @@
 import React from "react"
 
-type CardProps = { 
+type CardProps = {
+    className?: string;
     children: React.ReactNode;
 }
 
-export const Card = ({ children }: CardProps) => {
+export const Card = ({ className = '', children }: CardProps) => {
     return (
-        <div className="card">
+        <div className={`card ${className}`}>
             {children}
         </div>
     )
