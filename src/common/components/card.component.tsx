@@ -1,14 +1,12 @@
-import classNames from "classnames"
 import React from "react"
 
 type CardProps = { 
-    className?: string;
     children: React.ReactNode;
 }
 
-export const Card = ({ className, children }: CardProps) => {
+export const Card = ({ children }: CardProps) => {
     return (
-        <div className={classNames('card', className)}>
+        <div className="card">
             {children}
         </div>
     )

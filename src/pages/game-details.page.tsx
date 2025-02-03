@@ -1,18 +1,12 @@
-import { Card, Page } from '../common/components'
+import { Card, Loader, Page } from '../common/components'
 import { useGames, GameDetailsCard, GameScreenshotsCard } from '../game'
 export const GameDetailsPage = () => {
   const { game, isLoading } = useGames()
 
-  if (isLoading === true) {
-    return <div>Loading...</div>
+  if (isLoading === true || !game) {
+    return <Loader />
   }
-
-  if (!game) {
-    return <div>No game found</div>
-  }
-
-  console.log(game)
-
+  
   return (
     <Page>
       <h1>Find & track the best free-to-play games!</h1>

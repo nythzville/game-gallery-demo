@@ -71,6 +71,27 @@ body {
   margin-right: 5px;
 }
 
+/* Loader */
+.loader-container {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+}
+.loader { 
+  border: 8px solid rgba(255, 255, 255, .5); /* Light grey */
+  border-top: 8px solid rgb(17 24 39 ); /* Blue */
+  border-radius: 50%; 
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Game Search */
 .game-search-container {
   margin: 0 auto;
@@ -105,7 +126,8 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
-  padding: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
 }
 
 .game-gallery-container {
@@ -123,6 +145,11 @@ body {
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width: 1280px) {
+  .game-card-container {
+    width: 100%;
+  }
+}
 .game-card {
   width: 100%;
   margin: 10px;
@@ -134,8 +161,8 @@ body {
   display: flex;
   justify-content: space-between;
 }
-.game-card-thumbnail{
-  /* width: 40%; */
+.game-card-thumbnail {
+  display: inline-block;
   border-radius: 5px;
 }
 .game-card-description{
@@ -145,11 +172,11 @@ body {
 }
 
 
+
 /* Game Details Card */
 .game-details-container {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
 }
 .game-details-card {
   width: 100%;
@@ -158,7 +185,6 @@ body {
   cursor: pointer;
 }
 .game-details {
-  width: 60%;
   padding: 1rem;
   display: inline-flex;
   background-color: rgba(255, 255, 255, .1);
@@ -177,6 +203,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 .game-details-container .game-card-description{
   width: 60%;
@@ -190,6 +217,8 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  max-height: 240px;
+  overflow: hidden;
 }
 
 .game-screenshot-container .game-screenshot-card {
@@ -197,10 +226,12 @@ body {
   padding: 10px;
 }
 
-.game-screenshots-container .game-screenshot-card .game-screenshot {
+.game-screenshot {
   width: 100%;
   padding: 0;
   display: inline-flex;
   background-color: rgba(255, 255, 255, .1);
   border-radius: 5px;
+  max-height: 240px;
+  overflow: hidden;
 }

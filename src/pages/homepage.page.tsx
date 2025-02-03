@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Page } from '../common/components'
+import { Loader, Page } from '../common/components'
 import { GameCard } from '../game/components/game-card.component'
 import { useGames } from '../game/games.hooks'
 import { GameFilterComponent, GameSearch, IGame } from '../game'
@@ -9,8 +9,8 @@ export const HomePage = () => {
   const [ filteredGames, setFilteredGames ] = useState<IGame[]>(games)
 
   const renderGames = (filteredGames: IGame[]) => {
-    if (isLoading === true) {
-      return <div>Loading...</div>
+    if (isLoading || !games) {
+      return <Loader />
     }
 
     if (filteredGames.length === 0) {

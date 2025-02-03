@@ -19,7 +19,7 @@ export const GameSearch = ({ games, setGames }: SearchProps) => {
       <input
         type="text"
         onChange={handleSearch}
-        placeholder="Search for a game"
+        placeholder="Search by Name"
         className="game-search"
       />
     </div>

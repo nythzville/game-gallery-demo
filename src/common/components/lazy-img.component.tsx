@@ -1,4 +1,5 @@
 import { CSSProperties, memo, useEffect, useState } from 'react'
+import { Loader } from './loader.component'
 
 type Props = {
   className?: string
@@ -31,7 +32,7 @@ export const LazyImg = memo(({ className, src, alt, style }: Props) => {
   if (isError) {
     return (
       <div className={className} style={style}>
-        {"No Image"}
+        <Loader />
       </div>
     )
   }

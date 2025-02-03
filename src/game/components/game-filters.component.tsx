@@ -1,12 +1,26 @@
+import { useMemo } from "react"
 
-import { GamesFilter, PLATFORM_FILTER, SORT_FILTER } from "../games.constants"
+import { CATEGORY_OPTIONS, GamesFilter, PLATFORM_OPTIONS, SORT_OPTIONS } from "../games.constants"
 import { updateFilter } from './../games.slice'
 import { useAppSelector, useAppDispatch } from '../games.hooks'
+import { GameFilterInput } from "./game-filter-input.component"
 
 export const GameFilterComponent = () => {
     const dispatch = useAppDispatch()
     const gameFilter = useAppSelector((state) => state.games)
-    const { platform, category, sortBy } = gameFilter
+    const { selectedPlatform, selectedCategory, selectSortBy } = useMemo(() => {
+
+        const [selectedPlatform] = PLATFORM_OPTIONS.filter(platform => platform.value === gameFilter.platform)
+        const [selectedCategory] = CATEGORY_OPTIONS.filter(category => category.value === gameFilter.category)
+        const [selectSortBy] = SORT_OPTIONS.filter(sortBy => sortBy.value === gameFilter.sortBy)
+    
+        return {
+            selectedPlatform,
+            selectedCategory,
+            selectSortBy
+        }
+    }, [gameFilter])
+
 
     const onFilter = (filter: GamesFilter) => {
         dispatch(updateFilter(filter))
@@ -16,26 +30,42 @@ export const GameFilterComponent = () => {
         <div className="game-filters-container">
             <div>
                 Filter by Platform
-                <select onChange={(e) => onFilter({...gameFilter, platform: e.target.value})} value={platform}>
-                    {PLATFORM_FILTER.map((platform => {
-                        return (<option value={platform} key={platform}>{platform}</option>)
-                    }))}
-                </select>
+                <GameFilterInput
+                    name="platform"
+                    isSearchable={false}
+                    selectedValue={selectedPlatform}
+                    options={PLATFORM_OPTIONS}
+                    onChange={(value) => {
+                        if (!value) return
+                        onFilter({...gameFilter, platform: value})
+                    }}
+                />
             </div>
             <div>
                 Filter by Category
-                <select onChange={(e) => onFilter({...gameFilter, category: e.target.value})} value={category}>
-                    <option value="pc">PC</option>
-                    <option value="browser">Browser</option>
-                </select>
+                <GameFilterInput
+                    name="category"
+                    isSearchable={true}
+                    selectedValue={selectedCategory}
+                    options={CATEGORY_OPTIONS}
+                    onChange={(value) => {
+                        if (!value) return
+                        onFilter({...gameFilter, category: value})
+                    }}
+                />
             </div>
             <div>
                 Sort By
-                <select onChange={(e) => onFilter({...gameFilter, sortBy: e.target.value})} value={sortBy}>
-                    {SORT_FILTER.map(order => {
-                        return (<option value={order} key={order}>{order}</option>)
-                    })}
-                </select>
+                <GameFilterInput
+                    name="sortBy"
+                    isSearchable={false}
+                    selectedValue={selectSortBy}
+                    options={SORT_OPTIONS}
+                    onChange={(value) => {
+                        if (!value) return
+                        onFilter({...gameFilter, sortBy: value})
+                    }}
+                />
             </div>
         </div>
     )
